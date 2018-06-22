@@ -1,0 +1,17 @@
+{
+  "name": "TheSea",
+  "version": "0.1.0",
+  "description": "A maritime adventure through the sea nature",
+  "main": "sea.js",
+  "scripts": {
+    "test": "Nothing to show here"
+  },
+  "author": "GuiDevloper",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-util": "^3.0.8"
+  }
+}
