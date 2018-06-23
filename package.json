@@ -7,7 +7,6 @@
     "test": "Nothing to show here"
   },
   "author": "GuiDevloper",
-  "license": "ISC",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
