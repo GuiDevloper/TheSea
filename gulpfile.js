@@ -23,5 +23,5 @@ gulp.task('sass', function() {
 
 // Vigia Global
 gulp.task('watch', function() {
-  gulp.watch(sassFile , 'sass');
+  gulp.watch(sassFile, 'sass');
 });
