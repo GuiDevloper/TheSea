@@ -80,7 +80,7 @@ body{
   position: relative;
 }
 .nome, .raias {
-	height: 15vh;
+	height: 10vh;
   //background-color: #009688;
 }
 .nome {
@@ -120,12 +120,12 @@ body{
   background-position: center;
   background-size: contain;
   width: 60%;
-	//@include center-align;
 	& path, & circle {
 		stroke-opacity: 0.9;
 		stroke: blue;
 		fill-opacity: 0;
 		stroke-width: .5px;
+		//animation: draw 3s;
 	}
 }
 #descricao-1 {
@@ -138,18 +138,26 @@ body{
   position: absolute;
   right: 0;
 }
-#raia-l {
-	width: 30%;
-  margin-left: 5%;
-}
-#corpo-rl {
+.raias svg {
+	width: 50%;
 	cursor: pointer;
 	transition: 250ms;
-	transform: translateX(5px);
 }
-
+$raia-trans: "5px";
+#raia-l {
+  transform: translateX(#{$raia-trans});
+}
+#raia-r {
+  transform: translateX(-#{$raia-trans}) rotate(180deg);
+}
 .sOpac {
 	stroke: transparent !important;
+}
+@keyframes draw {
+	100% {
+		stroke-dashoffset: 0;
+		fill-opacity: 1;
+	}
 }
 
 

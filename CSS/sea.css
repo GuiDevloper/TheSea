@@ -97,7 +97,7 @@ body::-webkit-scrollbar-track {
 }
 
 .nome, .raias {
-  height: 15vh;
+  height: 10vh;
 }
 
 .nome {
@@ -162,19 +162,29 @@ body::-webkit-scrollbar-track {
   right: 0;
 }
 
-#raia-l {
-  width: 30%;
-  margin-left: 5%;
-}
-
-#corpo-rl {
+.raias svg {
+  width: 50%;
   cursor: pointer;
   transition: 250ms;
+}
+
+#raia-l {
   transform: translateX(5px);
+}
+
+#raia-r {
+  transform: translateX(-5px) rotate(180deg);
 }
 
 .sOpac {
   stroke: transparent !important;
+}
+
+@keyframes draw {
+  100% {
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+  }
 }
 
 @media screen and (min-width: 1200px) {
