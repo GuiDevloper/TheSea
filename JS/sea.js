@@ -4,7 +4,7 @@
 function getLength(els){
 	var len = 0;
 	for (var el of els.values()) {
-		len += el.tagName == "path" ? el.getTotalLength() : 
+		len += el.tagName == "path" ? el.getTotalLength() :
 			(2 * Math.PI) * el.getAttribute('r');
 	}
 	return len;
@@ -23,12 +23,8 @@ function calculateSVG(){
 		 "; stroke-dashoffset: "+pathLength);
 	console.log(pathLength);
 	c1 = draw.querySelectorAll("path, circle");
-	setAnimation(paths, "animation: draw 4s");
-	setAnimation(circles, "animation: draw 4s");
-	setTimeout(function(){
-		setAnimation(circles, "stroke-dashoffset: 0; fill-opacity: 1");
-		setAnimation(paths, "stroke-dashoffset: 0; fill-opacity: 1");
-	}, 3900);
+	setAnimation(paths, "animation: draw 4s forwards");
+	setAnimation(circles, "animation: draw 4s forwards");
 }
 calculateSVG();
 function setAnimation(els, value){
@@ -37,11 +33,11 @@ function setAnimation(els, value){
 	}
 }
 /*window.addEventListener("scroll", function(e) {
-  var scrollPercentage = 
-  	(document.documentElement.scrollTop + document.body.scrollTop) / 
+  var scrollPercentage =
+  	(document.documentElement.scrollTop + document.body.scrollTop) /
   		(document.documentElement.scrollHeight - document.documentElement.clientHeight);
   var drawLength = pathLength * scrollPercentage;
-	
+
 	var len = c1.length;
 	var i = 0;
 	while(i < len){
