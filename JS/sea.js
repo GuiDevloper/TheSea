@@ -14,17 +14,14 @@ function calculateSVG(){
 	draw = document.querySelector('#animal-1 svg');
 	paths = draw.querySelectorAll("path");
 	circles = draw.querySelectorAll("circle");
-	setAnimation(paths, "animation: initial");
-	setAnimation(circles, "animation: initial");
+	setAnimation([...paths, ...circles], "animation: initial");
 	pathLength = getLength(paths) + getLength(circles);
-	setAnimation(circles, "stroke-dasharray: " + pathLength +
-		 "; stroke-dashoffset: "+pathLength);
-	setAnimation(paths, "stroke-dasharray: " + pathLength +
-		 "; stroke-dashoffset: "+pathLength);
+	var strokeAndAnim = "stroke-dasharray: " + pathLength +
+		"; stroke-dashoffset: " + pathLength +
+		"; animation: draw 4s forwards;";
+	setAnimation([...paths, ...circles], strokeAndAnim);
 	console.log(pathLength);
 	c1 = draw.querySelectorAll("path, circle");
-	setAnimation(paths, "animation: draw 4s forwards");
-	setAnimation(circles, "animation: draw 4s forwards");
 }
 calculateSVG();
 function setAnimation(els, value){
