@@ -90,6 +90,7 @@ body{
   z-index: 1;
   margin: 0 10%;
 	text-shadow: 2px 2px 1px #001348;
+	font-weight: bold;
 }
 .raias {
 	display: flex;
@@ -119,7 +120,7 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  width: 60%;
+	width: 60%;
 	& path, & circle {
 		stroke-opacity: 0.9;
 		stroke: blue;
@@ -136,7 +137,8 @@ body{
   line-height: 3vw;
   padding-right: 2%;
   position: absolute;
-  right: 0;
+	right: 0;
+	text-shadow: 1px 2px 5px #001348;
 }
 .raias svg {
 	width: 50%;
@@ -170,19 +172,8 @@ $raia-trans: "5px";
 	#center {
 		width: 150vw;
 	}
-}
-@media screen and (max-width: 845px){
-	.animal, .descricao {
-		width: 100% !important;
-	}
 	#descricao-1 {
-		height: 50vh;
-		margin-top: -30vh;
-	}
-	#nome-1 {
-		padding-right: 0;
-	}
-	.raias {
-		margin-top: 15vh;
+    height: 50vh;
+    margin-top: -30vh;
 	}
 }
