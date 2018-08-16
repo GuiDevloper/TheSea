@@ -205,7 +205,19 @@ $raia-trans: "5px";
 		}
 	}
 	#descricao-1 {
-    height: 50vh;
-    margin-top: -30vh;
+		height: 50vh;
+		margin-top: -30vh;
+		width: 80% !important;
+		padding: 0 10%;
+		text-align: center;
+		position: static;
+		font-size: 3vw;
+		font-size: calc((.4vw - 5px) + (16px + .5vw));
+		line-height: 4.3vw;
+	}
+	.raias {
+		position: absolute;
+		width: 90%;
+		margin: 0 5%;
 	}
 }
