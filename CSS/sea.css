@@ -170,6 +170,27 @@ body::-webkit-scrollbar-track {
   transition: 250ms;
 }
 
+.raias svg .cls-1, .raias svg .cls-4 {
+  fill: none;
+}
+
+.raias svg .cls-1, .raias svg .cls-2, .raias svg .cls-4 {
+  stroke: #fff;
+  stroke-miterlimit: 10;
+}
+
+.raias svg .cls-1 {
+  stroke-width: 0.75px;
+}
+
+.raias svg .cls-2, .raias svg .cls-3 {
+  fill: #072a49;
+}
+
+.raias svg .cls-2, .raias svg .cls-4 {
+  stroke-width: 0.5px;
+}
+
 #raia-l {
   transform: translateX(5px);
 }
@@ -183,6 +204,9 @@ body::-webkit-scrollbar-track {
 }
 
 @keyframes draw {
+  0% {
+    fill-opacity: 0;
+  }
   100% {
     stroke-dashoffset: 0;
     fill-opacity: 1;
