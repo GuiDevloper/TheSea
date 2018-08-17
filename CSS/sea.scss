@@ -67,15 +67,22 @@ body{
 	margin-top: 35vh;
 	text-decoration: underline;
 }
+.mar {
+	background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
 #mar-1 {
 	height: 140vh;
 	margin-top: -50vh;
 	background-image: url('https://dl.dropbox.com/s/oak1t66iqdo5fr3/mar-1.svg?raw=1');
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
 }
-#tudo {
+#mar-2 {
+	background-image: url(https://www.dropbox.com/s/jdrmr0i8b0qmz2l/mar-2.svg?raw=1);
+	margin-top: 9vh;
+	height: 200vh;
+}
+.tudo {
 	margin-top: -110vh;
   position: relative;
 }
@@ -180,7 +187,7 @@ $raia-trans: "5px";
 		position: fixed;
 		margin-top: 15vh;
 	}
-	#tudo {
+	.tudo {
 		margin-top: -105vh;
 	}
 	.nome {
