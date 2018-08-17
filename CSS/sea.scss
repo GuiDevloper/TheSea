@@ -133,7 +133,7 @@ body{
   width: 60%;
   margin-top: 10vh;
   word-spacing: 1px;
-  font-size: 1.7vw;
+  font-size: 1.4rem;
   line-height: 3vw;
   padding-right: 2%;
   position: absolute;
@@ -158,11 +158,13 @@ $raia-trans: "5px";
 }
 @keyframes draw {
 	0% {
+		stroke-opacity: 1;
 		fill-opacity: 0;
 	}
 	100% {
 		stroke-dashoffset: 0;
 		fill-opacity: 1;
+		stroke-opacity: 0;
 	}
 }
 
