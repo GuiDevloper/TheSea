@@ -70,21 +70,28 @@ body{
 .mar {
 	background-size: cover;
   background-repeat: no-repeat;
-  position: relative;
+	position: relative;
+	&.m1 {
+		height: 140vh;
+		margin-top: -50vh;
+		background-image: url('https://dl.dropbox.com/s/oak1t66iqdo5fr3/mar-1.svg?raw=1');
+	}
+	&.m2 {
+		height: 200vh;
+		margin-top: 1rem;
+		background-image: url('https://www.dropbox.com/s/jdrmr0i8b0qmz2l/mar-2.svg?raw=1');
+	}
 }
-#mar-1 {
-	height: 140vh;
-	margin-top: -50vh;
-	background-image: url('https://dl.dropbox.com/s/oak1t66iqdo5fr3/mar-1.svg?raw=1');
-}
-#mar-2 {
-	background-image: url(https://www.dropbox.com/s/jdrmr0i8b0qmz2l/mar-2.svg?raw=1);
-	margin-top: 9vh;
-	height: 200vh;
-}
+
 .tudo {
 	margin-top: -110vh;
-  position: relative;
+	position: relative;
+	&.t2 {
+		margin-top: -210vh !important;
+	}
+	&.t3 {
+		margin-top: 5vh;
+	}
 }
 .nome, .raias {
 	height: 10vh;
@@ -189,6 +196,7 @@ $raia-trans: "5px";
 	}
 	.tudo {
 		margin-top: -105vh;
+		margin-bottom: 19vh;
 	}
 	.nome {
 		font-size: 1.7rem;
