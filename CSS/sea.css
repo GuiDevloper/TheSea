@@ -95,8 +95,8 @@ body::-webkit-scrollbar-track {
 }
 
 .mar.m2 {
-  height: 220vh;
-  margin-top: 16vh;
+  height: 200vh;
+  margin-top: 10vh;
   background-image: url("https://www.dropbox.com/s/jdrmr0i8b0qmz2l/mar-2.svg?raw=1");
 }
 
@@ -107,12 +107,13 @@ body::-webkit-scrollbar-track {
 }
 
 .tudo.t2 {
-  margin-top: -225vh !important;
+  margin-bottom: 15vh;
+  margin-top: -215vh !important;
 }
 
 .tudo.t3 {
-  margin-top: 10vh;
   margin-bottom: 0;
+  margin-top: -15vh;
 }
 
 .nome, .raias {
@@ -122,11 +123,12 @@ body::-webkit-scrollbar-track {
 .nome {
   font-size: 3vw;
   width: 50%;
-  position: absolute;
   z-index: 1;
-  margin: 0 10%;
+  margin: 0 0 0 10%;
   text-shadow: 2px 2px 1px #001348;
   font-weight: bold;
+  position: absolute;
+  padding-top: 15vh;
 }
 
 .raias {
@@ -150,7 +152,6 @@ body::-webkit-scrollbar-track {
 
 #nome-1 {
   text-align: left;
-  padding-top: 10vh;
   margin-bottom: auto;
 }
 
@@ -248,36 +249,48 @@ body::-webkit-scrollbar-track {
     position: fixed;
     margin-top: 15vh;
   }
+  /*.mar.m2 {
+    height: 205vh;
+		margin-top: -3vh;
+	}*/
   .tudo {
-    margin-top: -105vh;
-    margin-bottom: 19vh;
+    margin-top: -100vh;
+    height: fit-content;
+    margin-bottom: 10vh;
+  }
+  .tudo.t2 {
+    margin-top: -195vh !important;
+  }
+  .tudo.t3 {
+    margin-top: 10vh;
   }
   .nome {
     font-size: 1.7rem;
-    width: 80%;
-    height: 30vh;
+    width: 100%;
+    position: static;
+    padding-top: 0vh;
   }
   #nome-1 {
-    padding-top: 13vh !important;
+    padding-top: 0vh !important;
   }
   .ncientifico {
     font-size: 1rem;
+    margin-right: 10%;
   }
   .dados {
-    height: 85vh;
-    margin: 0 0 5vh 0;
+    height: 70vh;
   }
   #animal-1 {
     width: 100% !important;
     display: flex !important;
-    margin-top: -10vh !important;
+    margin-top: -15vh !important;
+    height: 50%;
   }
   #animal-1 svg {
     width: 90%;
   }
   #descricao-1 {
     height: 50vh;
-    margin-top: -30vh;
     width: 80% !important;
     padding: 0 10%;
     text-align: center;
@@ -285,6 +298,7 @@ body::-webkit-scrollbar-track {
     font-size: 3vw;
     font-size: calc((.4vw - 5px) + (16px + .5vw));
     line-height: 4.3vw;
+    margin-top: -5vh;
   }
   .raias {
     position: absolute;
