@@ -8,19 +8,17 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #9d1328;
+  background: #3d7bff;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background-color: #171717;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  background-color: #0a1c76;
 }
 
 #container {
@@ -63,9 +61,9 @@ body::-webkit-scrollbar-track {
 }
 
 #center {
-  border: 0 !important;
-  height: 70vh !important;
-  width: 100vw;
+  border: 0;
+  height: 70vh;
+  width: 102%;
   margin-top: 30vh;
 }
 
