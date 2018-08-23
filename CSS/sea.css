@@ -96,7 +96,7 @@ body::-webkit-scrollbar-track {
 
 .mar.m2 {
   height: 200vh;
-  margin-top: 10vh;
+  margin-top: 15vh;
   background-image: url("https://www.dropbox.com/s/jdrmr0i8b0qmz2l/mar-2.svg?raw=1");
 }
 
@@ -131,12 +131,6 @@ body::-webkit-scrollbar-track {
   padding-top: 15vh;
 }
 
-.raias {
-  display: flex;
-  z-index: 2;
-  margin: 8% 0 -15vh;
-}
-
 .dados {
   width: 100%;
   height: 85vh;
@@ -153,6 +147,7 @@ body::-webkit-scrollbar-track {
 #nome-1 {
   text-align: left;
   margin-bottom: auto;
+  padding-top: 0vh !important;
 }
 
 .ncientifico {
@@ -186,10 +181,18 @@ body::-webkit-scrollbar-track {
   text-shadow: 1px 2px 5px #001348;
 }
 
+.raias {
+  display: flex;
+  z-index: 2;
+  margin: 5vh 0 -5vh;
+}
+
 .raias svg {
   width: 50%;
   cursor: pointer;
   transition: 250ms;
+  height: 80%;
+  padding-top: 2%;
 }
 
 .raias svg .cls-1, .raias svg .cls-4 {
@@ -213,12 +216,14 @@ body::-webkit-scrollbar-track {
   stroke-width: 0.5px;
 }
 
-#raia-l {
+.raias #raia-l {
   transform: translateX(5px);
 }
 
-#raia-r {
+.raias #raia-r {
   transform: translateX(-5px) rotate(180deg);
+  padding-top: 0;
+  padding-bottom: 2%;
 }
 
 .sOpac {
