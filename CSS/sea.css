@@ -22,33 +22,6 @@ body::-webkit-scrollbar-track {
 }
 
 #container {
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  -ms-box-align: center;
-  -o-box-align: center;
-  box-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  -o-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
-  -o-justify-content: center;
-  justify-content: center;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -ms-box-pack: center;
-  -o-box-pack: center;
-  box-pack: center;
-  -ms-flex-align: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
   height: 100vh;
   max-width: 100vw;
   background-image: url("https://dl.dropbox.com/s/202xvtnu2dl4u14/back-container.svg?raw=1");
@@ -58,13 +31,17 @@ body::-webkit-scrollbar-track {
   position: absolute;
   font-size: 20px;
   z-index: 1;
+  width: 100%;
+  text-align: center;
+  padding-top: 50vh;
+  text-shadow: 1px 1px 10px #0D47A1;
 }
 
 #center {
   border: 0;
   height: 70vh;
   width: 102% !important;
-  margin: 15vh 0 0 0 !important;
+  margin: 32vh 0 0 0 !important;
   position: absolute;
 }
 
