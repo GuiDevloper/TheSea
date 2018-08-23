@@ -1,12 +1,12 @@
 /* prefixer */
-@mixin prefix($style: transform, $value: rotate(0deg)){
+@mixin prefix($style: transform, $value: rotate(0deg)) {
   #{ "-webkit-" + $style }: #{ $value };
     #{ "-moz-" + $style }: #{ $value };
       #{ "-ms-" + $style }: #{ $value };
         #{ "-o-" + $style }: #{ $value };
           #{$style}: #{ $value };
 }
-body{
+body {
 	height: 100%;
 	color: white;
 	font-family: "Raleway";
@@ -17,8 +17,7 @@ body{
 	}
 	&::-webkit-scrollbar-thumb {
     background: #3d7bff;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+		@include prefix('border-radius', '10px');
 	}
 	&::-webkit-scrollbar-track {
     background-color: #0a1c76;
@@ -26,7 +25,7 @@ body{
 }
 #container {
 	height: 100vh;
-  max-width: 100vw;
+  width: 100vw;
 	background-image: url('https://dl.dropbox.com/s/202xvtnu2dl4u14/back-container.svg?raw=1');
 	& p {
 		position: absolute;
@@ -41,8 +40,8 @@ body{
 #center {
 	border: 0;
 	height: 70vh;
-	width: 102% !important;
-	margin: 32vh 0 0 0 !important;
+	width: 102%;
+	margin: 32vh 0 0 0;
 	position: absolute;
 }
 $p-top: 15;
@@ -85,10 +84,10 @@ $p-top: 15;
     margin-top: -15vh;
 	}
 }
-.nome, .raias {
+.nomes, .raias {
 	height: 10vh;
 }
-.nome {
+.nomes {
 	font-size: 3vw;
   width: 50%;
   z-index: 1;
@@ -99,27 +98,26 @@ $p-top: 15;
 	padding-top: 15vh;
 }
 .dados {
-	width: 100%;
 	height: 85vh;
 	margin-top: 5%;
 }
-.animal, .descricao {
+.animal, .desc {
 	height: inherit;
   float: left;
   border-radius: 10%;
 	text-align: right;
 }
-#nome-1 {
+.nome1 {
 	text-align: left;
 	margin: 0;
 	margin-bottom: auto;
 	padding-top: 0vh !important;
 }
-.ncientifico{
+.nome2{
   font-size: 1.3vw;
   margin: inherit;
 }
-#animal-1 {
+.animal {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -132,7 +130,7 @@ $p-top: 15;
 		//animation: draw 3s;
 	}
 }
-#descricao-1 {
+.desc {
   width: 60%;
   margin-top: 10vh;
   word-spacing: 1px;
@@ -156,11 +154,11 @@ $raia-trans: "5px";
 		padding-top: 2%;
 		.cls-1,.cls-4{fill:none;}.cls-1,.cls-2,.cls-4{stroke:#fff;stroke-miterlimit:10;}.cls-1{stroke-width:0.75px;}.cls-2,.cls-3{fill:#072a49;}.cls-2,.cls-4{stroke-width:0.5px;}
 	}
-	#raia-l {
-		transform: translateX(#{$raia-trans});
+	.raia-l {
+		@include prefix('transform', 'translateX(#{$raia-trans})');
 	}
-	#raia-r {
-		transform: translateX(-#{$raia-trans}) rotate(180deg);
+	.raia-r {
+		@include prefix('transform', 'translateX(-#{$raia-trans}) rotate(180deg)');
 		padding-top: 0;
     padding-bottom: 2%;
 	}
@@ -185,20 +183,16 @@ $raia-trans: "5px";
 	#img-back {
 		height: inherit;
 	}
-	.mar.m2 {
+	.m2 {
 		height: 203vh;
 	}
 }
 @media screen and (max-width: 760px){
 	#center {
 		width: 150vw;
-		position: fixed;
-		margin-top: 15vh;
+    position: fixed;
+    margin-left: -25%;
 	}
-	/*.mar.m2 {
-    height: 205vh;
-		margin-top: -3vh;
-	}*/
 	.tudo {
 		margin-top: -100vh;
     height: fit-content;
@@ -210,23 +204,23 @@ $raia-trans: "5px";
 			margin-top: 10vh;
 		}
 	}
-	.nome {
+	.nomes {
 		font-size: 1.7rem;
 		width: 100%;
 		position: static;
 		padding-top: 0vh;
 	}
-	#nome-1 {
+	.nome1 {
 		padding-top: 0vh !important;
 	}
-	.ncientifico {
+	.nome2 {
 		font-size: 1rem;
     margin-right: 10%;
 	}
 	.dados {
 		height: 70vh;
 	}
-	#animal-1 {
+	.animal {
 		width: 100% !important;
     display: flex !important;
     margin-top: -15vh !important;
@@ -235,7 +229,7 @@ $raia-trans: "5px";
 			width: 90%;
 		}
 	}
-	#descricao-1 {
+	.desc {
 		height: 50vh;
     width: 80% !important;
     padding: 0 10%;
