@@ -63,8 +63,9 @@ body::-webkit-scrollbar-track {
 #center {
   border: 0;
   height: 70vh;
-  width: 102%;
-  margin-top: 30vh;
+  width: 102% !important;
+  margin: 15vh 0 0 0 !important;
+  position: absolute;
 }
 
 #p1 {
@@ -144,6 +145,7 @@ body::-webkit-scrollbar-track {
 
 #nome-1 {
   text-align: left;
+  margin: 0;
   margin-bottom: auto;
   padding-top: 0vh !important;
 }
@@ -243,6 +245,9 @@ body::-webkit-scrollbar-track {
 @media screen and (min-width: 1200px) {
   #img-back {
     height: inherit;
+  }
+  .mar.m2 {
+    height: 203vh;
   }
 }
 

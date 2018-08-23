@@ -51,8 +51,9 @@ body{
 #center {
 	border: 0;
 	height: 70vh;
-	width: 102%;
-	margin-top: 30vh;
+	width: 102% !important;
+	margin: 15vh 0 0 0 !important;
+	position: absolute;
 }
 #p1 {
 	margin-top: -15vh;
@@ -95,7 +96,6 @@ body{
 }
 .nome, .raias {
 	height: 10vh;
-  //background-color: #009688;
 }
 .nome {
 	font-size: 3vw;
@@ -114,13 +114,13 @@ body{
 }
 .animal, .descricao {
 	height: inherit;
-   //background: #171717;
   float: left;
   border-radius: 10%;
 	text-align: right;
 }
 #nome-1 {
-  text-align: left;
+	text-align: left;
+	margin: 0;
 	margin-bottom: auto;
 	padding-top: 0vh !important;
 }
@@ -193,6 +193,9 @@ $raia-trans: "5px";
 @media screen and (min-width: 1200px){
 	#img-back {
 		height: inherit;
+	}
+	.mar.m2 {
+		height: 203vh;
 	}
 }
 @media screen and (max-width: 760px){
