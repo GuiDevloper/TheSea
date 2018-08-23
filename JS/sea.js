@@ -1,7 +1,11 @@
 //var td = svg;
 //animal.innerHtml = td;
-
-function getLength(els){
+function setAnimation(els, value) {
+	for (var el of els){
+		el.style.cssText += ";" + value;
+	}
+}
+function getLength(els) {
 	var len = 0;
 	for (var el of els.values()) {
 		len += el.tagName == "path" ? el.getTotalLength() :
@@ -10,8 +14,8 @@ function getLength(els){
 	return len;
 }
 var draw, paths, circles, pathLength, c1;
-function calculateSVG(){
-	draw = document.querySelector('#animal-1 svg');
+function calculateSVG() {
+	draw = document.querySelector('.a1 svg');
 	paths = draw.querySelectorAll("path");
 	circles = draw.querySelectorAll("circle");
 	setAnimation([...paths, ...circles], "animation: initial");
@@ -24,11 +28,6 @@ function calculateSVG(){
 	c1 = draw.querySelectorAll("path, circle");
 }
 calculateSVG();
-function setAnimation(els, value){
-	for (var el of els){
-		el.style.cssText += ";" + value;
-	}
-}
 /*window.addEventListener("scroll", function(e) {
   var scrollPercentage =
   	(document.documentElement.scrollTop + document.body.scrollTop) /
@@ -43,59 +42,67 @@ function setAnimation(els, value){
 		i++;
 	}
 });*/
-var raias = document.getElementsByClassName("raias")[0];
-var childs = raias.children;
+var raias = document.getElementsByClassName("raias");
+var childs = raias[0].children;
 //Cria raia-pequena direita
 var raia_r = childs[0].cloneNode(true);
-//Adiciona novo id
-raia_r.id = 'raia-r';
+//Substitui classe
+raia_r.classList.remove('raia-l');
+raia_r.classList.add('raia-r');
 //Inclui para as raias
-raias.appendChild(raia_r);
+raias[0].appendChild(raia_r);
 var fish_index = 0;
-//Abre o node e percorre adding events de click
-[...childs].forEach(function(elem) {
-	elem.addEventListener('click', function(e){
-		//Obtém o atual disparador
-		$this = e.currentTarget;
-		//De acordo com o id clicado, define transform
-		if ($this.id == "raia-l") {
-			var tran = "translateX(5px)";
-			fish_index = fish_index == 0 ? 5 : fish_index-1;
-		} else {
-			var tran = "translateX(-5px) rotate(180deg)";
-			fish_index = fish_index == 5 ? 0 : fish_index+1;
-		}
-		getFish("./Fishs/Descriptions/Deep1.json?q=test&amp;rnd=" + Math.random(), fish_index);
-		//Mudando atual para translateX(0)
-		$this.style.transform = $this.style.transform.replace(
-				tran.replace(" rotate(180deg)",""), "translateX(0px)");
-		//Apos 200ms retorna ao normal
-		setTimeout(function(){
-			$this.style.transform = tran;
-		}, 200);
-	})
-});
+for (var elem of [...raias].values()) {
+	elem.innerHTML = raias[0].innerHTML;
+	var $tudo = elem.parentElement;
+	var deep = $tudo.classList.value.replace('tudo t', '');
+	for (var raia of [...elem.children].values()) {
+		//Abre o node e percorre adding events de click
+		raia.addEventListener('click', function(e) {
+			//Obtém o atual disparador
+			$this = e.currentTarget;
+			var tran;
+			//De acordo com o id clicado, define transform
+			if ($this.id == "raia-l") {
+				tran = "translateX(5px)";
+				fish_index = fish_index == 0 ? 5 : fish_index-1;
+			} else {
+				tran = "translateX(-5px) rotate(180deg)";
+				fish_index = fish_index == 5 ? 0 : fish_index+1;
+			}
+			getFish("./Fishs/Descriptions/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random(), fish_index, $tudo);
+			//Mudando atual para translateX(0)
+			setAnimation([$this], $this.style.transform.replace(
+				tran.replace(" rotate(180deg)", ""), "translateX(0px)"
+			));
+			//Apos 200ms retorna ao normal
+			setTimeout(function() {
+				setAnimation([$this], tran);
+			}, 200);
+		});
+	}
+}
 var xhr = new XMLHttpRequest();
 //Ajax object construído
 var Ajax = {
-	'send': function(url, type){
+	'send': function(url, type) {
 		xhr.open(type, url, true);
 		xhr.send(null);
 	},
-	'isReady': function($this){
+	'isReady': function($this) {
 		return $this.readyState == 4 && $this.status == 200;
 	}
 };
-function getFish(url, index) {
+function getFish(url, index, $tudo) {
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
-		if(Ajax.isReady(this)){
+		if(Ajax.isReady(this)) {
 			var data = xhr.responseText;
 	  	var fish = JSON.parse(data)[index];
-	  	document.getElementById("nome-1").innerHTML = fish[0];
-	  	document.getElementsByClassName("ncientifico")[0].innerHTML = fish[1];
-	  	document.getElementById("descricao-1").innerHTML = fish[2];
-	  	document.getElementById("animal-1").innerHTML = fish[3];
+	  	$tudo.getElementsByClassName("nome1")[0].innerHTML = fish[0];
+	  	$tudo.getElementsByClassName("nome2")[0].innerHTML = fish[1];
+	  	$tudo.getElementsByClassName("desc").innerHTML = fish[2];
+	  	$tudo.getElementsByClassName("animal").innerHTML = fish[3];
 	  	calculateSVG();
 		}
 	};
