@@ -1,5 +1,3 @@
-//var td = svg;
-//animal.innerHtml = td;
 function setAnimation(els, value) {
 	for (var el of els){
 		el.style.cssText += ";" + value;
@@ -13,6 +11,17 @@ function getLength(els) {
 	}
 	return len;
 }
+var xhr = new XMLHttpRequest();
+//Ajax object construído
+var Ajax = {
+	'send': function(url, type) {
+		xhr.open(type, url, true);
+		xhr.send(null);
+	},
+	'isReady': function($this) {
+		return $this.readyState == 4 && $this.status == 200;
+	}
+};
 var draw, paths, circles, pathLength, c1;
 function calculateSVG() {
 	draw = document.querySelector('.a1 svg');
@@ -41,55 +50,50 @@ calculateSVG();
 		i++;
 	}
 });*/
+
 var raias = document.getElementsByClassName("raias");
 var childs = raias[0].children;
-//Cria raia-pequena direita
+// Cria raia-pequena direita
 var raia_r = childs[0].cloneNode(true);
-//Substitui classe
+// Substitui classe
 raia_r.classList.remove('raia-l');
 raia_r.classList.add('raia-r');
-//Inclui para as raias
+// Inclui para as raias
 raias[0].appendChild(raia_r);
-var fish_index = 0;
+
+var fish = 0;
 for (var elem of [...raias].values()) {
 	elem.innerHTML = raias[0].innerHTML;
 	for (var raia of [...elem.children].values()) {
-		//Abre o node e percorre adding events de click
+		// Abre o node e percorre adding events de click
 		raia.addEventListener('click', function(e) {
-			//Obtém o atual disparador
+			// Obtém o atual disparador
 			$this = e.currentTarget;
-			var tran;
-			//De acordo com o id clicado, define transform
-			if ($this.id == "raia-l") {
-				tran = "translateX(5px)";
-				fish_index = fish_index == 0 ? 5 : fish_index-1;
-			} else {
-				tran = "translateX(-5px) rotate(180deg)";
-				fish_index = fish_index == 5 ? 0 : fish_index+1;
-			}
-			getFish(fish_index, $this.parentElement.parentElement);
-			//Mudando atual para translateX(0)
-			setAnimation([$this], $this.style.transform.replace(
-				tran.replace(" rotate(180deg)", ""), "translateX(0px)"
-			));
-			//Apos 200ms retorna ao normal
+			var tran = "transform: ";
+			// Se for raia esquerda
+			var isLeft = $this.classList.value == "raia-l";
+			// De acordo com o id clicado, define transform
+			tran += "translateX(";
+			// Define px após animação
+			tran += isLeft ? "5px)" : "-5px) rotate(180deg)";
+			// Define indice do próximo peixe
+			fish = isLeft ? (
+				fish == 0 ? 5 : fish - 1) : (
+					fish == 5 ? 0 : fish + 1);
+			// Obtém peixe dos JSON usando indice do .tudo
+			getFish(fish, $this.parentElement.parentElement);
+			// Mudando atual para translateX(0)
+			setAnimation([$this], "transform: translateX(0px)" + (
+				!isLeft ? " rotate(180deg)" : '')
+			);
+			// Apos 200ms retorna ao normal
 			setTimeout(function() {
 				setAnimation([$this], tran);
 			}, 200);
 		});
 	}
 }
-var xhr = new XMLHttpRequest();
-//Ajax object construído
-var Ajax = {
-	'send': function(url, type) {
-		xhr.open(type, url, true);
-		xhr.send(null);
-	},
-	'isReady': function($this) {
-		return $this.readyState == 4 && $this.status == 200;
-	}
-};
+
 function getFish(index, $tudo) {
 	var deep = $tudo.classList.value.replace('tudo t', '');
 	var url = "./Fishs/Descriptions/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
