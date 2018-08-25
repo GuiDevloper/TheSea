@@ -81,27 +81,24 @@ for (var elem of [...raias].values()) {
 	}
 }
 
+// Add click para setas
 addRaiaEvent = function(raia) {
 	// Abre o node e percorre adding events de click
 	raia.addEventListener('click', function(e) {
 		// Obtém o atual disparador
 		var $this = e.currentTarget;
-		var tran = "transform: ";
 		// Se for raia esquerda
 		var isLeft = $this.classList.value == "raia-l";
-		// De acordo com o id clicado, define transform
-		tran += "translateX(";
-		// Define px após animação
-		tran += isLeft ? "5px)" : "-5px) rotate(180deg)";
-
+		var tran = ["transform: translateX(", !isLeft ? " rotate(180deg)" : ''];
+		var indexDeep = ($this.parentElement.parentElement)
+			.classList.value.replace('tudo t', '');
 		// Obtém peixe dos JSON usando indice do .tudo
-		getFish( fish, ($this.parentElement.parentElement)
-			.classList.value.replace('tudo t', '')
-		);
+		getFish(indexDeep, isLeft);
+		var transDefault = tran[0] + "0px)" + tran[1];
 		// Mudando atual para translateX(0)
-		setStyle([$this], "transform: translateX(0px)" + (
-			!isLeft ? " rotate(180deg)" : '')
-		);
+		setStyle([$this], transDefault);
+		// Define transform e px após animação
+		tran += isLeft ? "5px)" : "-5px) rotate(180deg)";
 		// Apos 200ms retorna ao normal
 		setTimeout(function() {
 			setStyle([$this], tran);
