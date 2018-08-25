@@ -77,38 +77,46 @@ raias[0].appendChild(raia_r);
 for (var elem of [...raias].values()) {
 	elem.innerHTML = raias[0].innerHTML;
 	for (var raia of [...elem.children].values()) {
-		// Abre o node e percorre adding events de click
-		raia.addEventListener('click', function(e) {
-			// Obtém o atual disparador
-			var $this = e.currentTarget;
-			var tran = "transform: ";
-			var fish = 0;
-			// Se for raia esquerda
-			var isLeft = $this.classList.value == "raia-l";
-			// De acordo com o id clicado, define transform
-			tran += "translateX(";
-			// Define px após animação
-			tran += isLeft ? "5px)" : "-5px) rotate(180deg)";
-
-			// Obtém peixe dos JSON usando indice do .tudo
-			getFish( fish, ($this.parentElement.parentElement)
-				.classList.value.replace('tudo t', '')
-			);
-			// Mudando atual para translateX(0)
-			setStyle([$this], "transform: translateX(0px)" + (
-				!isLeft ? " rotate(180deg)" : '')
-			);
-			// Apos 200ms retorna ao normal
-			setTimeout(function() {
-				setStyle([$this], tran);
-			}, 200);
-		});
+		addRaiaEvent(raia);
 	}
 }
 
+addRaiaEvent = function(raia) {
+	// Abre o node e percorre adding events de click
+	raia.addEventListener('click', function(e) {
+		// Obtém o atual disparador
+		var $this = e.currentTarget;
+		var tran = "transform: ";
+		// Se for raia esquerda
+		var isLeft = $this.classList.value == "raia-l";
+		// De acordo com o id clicado, define transform
+		tran += "translateX(";
+		// Define px após animação
+		tran += isLeft ? "5px)" : "-5px) rotate(180deg)";
+
+		// Obtém peixe dos JSON usando indice do .tudo
+		getFish( fish, ($this.parentElement.parentElement)
+			.classList.value.replace('tudo t', '')
+		);
+		// Mudando atual para translateX(0)
+		setStyle([$this], "transform: translateX(0px)" + (
+			!isLeft ? " rotate(180deg)" : '')
+		);
+		// Apos 200ms retorna ao normal
+		setTimeout(function() {
+			setStyle([$this], tran);
+		}, 200);
+	});
+};
+
+var fish = 0;
 // Carrega peixe
 // Recebe peixe e sua profundidade
 function getFish(index, deep) {
+	// Define indice do próximo peixe
+	fish = isLeft ? (
+		fish == 0 ? 5 : fish - 1) : (
+			fish == 5 ? 0 : fish + 1);
 	var url = "./Fishs/Descriptions/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
