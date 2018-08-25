@@ -107,14 +107,14 @@ for (var elem of [...raias].values()) {
 	}
 }
 
-var fish = 0;
+var index = 0;
 // Carrega peixe
 // Recebe peixe e sua profundidade
-function getFish(index, deep) {
+function getFish(deep, isLeft) {
 	// Define indice do próximo peixe
-	fish = isLeft ? (
-		fish == 0 ? 5 : fish - 1) : (
-			fish == 5 ? 0 : fish + 1);
+	index = isLeft == null ? 0 : (isLeft ?
+		index == 0 ? 5 : index - 1 : (
+			index == 5 ? 0 : index + 1));
 	var url = "./Fishs/Descriptions/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
