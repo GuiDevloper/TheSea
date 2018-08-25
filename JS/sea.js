@@ -1,19 +1,27 @@
+getById = function(root, id) {
+	root = root || document;
+	return root.getElementById(id);
+};
+getByClass = function(root, clas) {
+	root = root || document;
+	return root.getElementsByClassName(clas);
+};
 // Set ou update css de elementos
-function setStyle(els, value) {
-	for (var el of els){
+setStyle = function(els, value) {
+	for (var el of [...els]){
 		el.style.cssText += ";" + value;
 	}
-}
+};
 
 // Get length de svg
-function getLength(els) {
+getLength = function(els) {
 	var len = 0;
-	for (var el of els.values()) {
+	for (var el of [...els].values()) {
 		len += el.tagName == "path" ? el.getTotalLength() :
 			(2 * Math.PI) * el.getAttribute('r');
 	}
 	return len;
-}
+};
 
 var xhr = new XMLHttpRequest();
 //Ajax object construído
@@ -29,9 +37,9 @@ var Ajax = {
 
 var draw, paths, circles, pathLength, c1;
 function calculateSVG($tudo) {
-	draw = $tudo.querySelector(".animal svg");
-	paths = draw.querySelectorAll("path");
-	circles = draw.querySelectorAll("circle");
+	draw = $tudo.getElementsByClassName("animal")[0].getElementsByTagName("svg")[0];
+	paths = draw.getElementsByTagName("path");
+	circles = draw.getElementsByTagName("circle");
 	setStyle([...paths, ...circles], "animation: initial");
 	pathLength = getLength(paths) + getLength(circles);
 	var strokeAndAnim = "stroke-dasharray: " + pathLength +
@@ -66,25 +74,22 @@ raia_r.classList.add('raia-r');
 // Inclui para as raias
 raias[0].appendChild(raia_r);
 
-var fish = 0;
 for (var elem of [...raias].values()) {
 	elem.innerHTML = raias[0].innerHTML;
 	for (var raia of [...elem.children].values()) {
 		// Abre o node e percorre adding events de click
 		raia.addEventListener('click', function(e) {
 			// Obtém o atual disparador
-			$this = e.currentTarget;
+			var $this = e.currentTarget;
 			var tran = "transform: ";
+			var fish = 0;
 			// Se for raia esquerda
 			var isLeft = $this.classList.value == "raia-l";
 			// De acordo com o id clicado, define transform
 			tran += "translateX(";
 			// Define px após animação
 			tran += isLeft ? "5px)" : "-5px) rotate(180deg)";
-			// Define indice do próximo peixe
-			fish = isLeft ? (
-				fish == 0 ? 5 : fish - 1) : (
-					fish == 5 ? 0 : fish + 1);
+
 			// Obtém peixe dos JSON usando indice do .tudo
 			getFish( fish, ($this.parentElement.parentElement)
 				.classList.value.replace('tudo t', '')
