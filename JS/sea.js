@@ -109,12 +109,13 @@ for (var elem of [...raias].values()) {
 
 var index = 0;
 // Carrega peixe
-// Recebe peixe e sua profundidade
-function getFish(deep, isLeft) {
+// Recebe profundidade e SE é decrescente
+getFish = function(deep, isLeft) {
+	var max = deep != 1 ? 4 : 5;
 	// Define indice do próximo peixe
-	index = isLeft == null ? 0 : (isLeft ?
-		index == 0 ? 5 : index - 1 : (
-			index == 5 ? 0 : index + 1));
+	index = isLeft == null ? 0 : (isLeft ? (
+		index == 0 ? max : index-1) : (
+			index == max ? 0 : index+1 ));
 	var url = "./Fishs/Descriptions/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
