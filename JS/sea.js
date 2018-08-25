@@ -74,13 +74,6 @@ raia_r.classList.add('raia-r');
 // Inclui para as raias
 raias[0].appendChild(raia_r);
 
-for (var elem of [...raias].values()) {
-	elem.innerHTML = raias[0].innerHTML;
-	for (var raia of [...elem.children].values()) {
-		addRaiaEvent(raia);
-	}
-}
-
 // Add click para setas
 addRaiaEvent = function(raia) {
 	// Abre o node e percorre adding events de click
@@ -98,13 +91,21 @@ addRaiaEvent = function(raia) {
 		// Mudando atual para translateX(0)
 		setStyle([$this], transDefault);
 		// Define transform e px após animação
-		tran += isLeft ? "5px)" : "-5px) rotate(180deg)";
+		tran = tran[0] + isLeft ? "5px)" : "-5px)" + tran[1];
 		// Apos 200ms retorna ao normal
 		setTimeout(function() {
 			setStyle([$this], tran);
 		}, 200);
 	});
 };
+
+// Loop nas div de setas-raias
+for (var elem of [...raias].values()) {
+	elem.innerHTML = raias[0].innerHTML;
+	for (var raia of [...elem.children].values()) {
+		addRaiaEvent(raia);
+	}
+}
 
 var fish = 0;
 // Carrega peixe
