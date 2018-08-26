@@ -1,10 +1,14 @@
-getById = function(root, id) {
+getById = function(id, root) {
 	root = root || document;
 	return root.getElementById(id);
 };
-getByClass = function(root, clas) {
+getByClass = function(clas, root) {
 	root = root || document;
 	return root.getElementsByClassName(clas);
+};
+getByTag = function(tag, root) {
+	root = root || document;
+	return root.getElementsByTagName(tag);
 };
 // Set ou update css de elementos
 setStyle = function(els, value) {
@@ -37,9 +41,9 @@ var Ajax = {
 
 var draw, paths, circles, pathLength, c1;
 function calculateSVG($tudo) {
-	draw = $tudo.getElementsByClassName("animal")[0].getElementsByTagName("svg")[0];
-	paths = draw.getElementsByTagName("path");
-	circles = draw.getElementsByTagName("circle");
+	draw = getByTag("svg", getByClass("animal", $tudo)[0])[0];
+	paths = getByTag("path", draw);
+	circles = getByTag("circle", draw);
 	setStyle([...paths, ...circles], "animation: initial");
 	pathLength = getLength(paths) + getLength(circles);
 	var strokeAndAnim = "stroke-dasharray: " + pathLength +
@@ -64,7 +68,7 @@ function calculateSVG($tudo) {
 	}
 });*/
 
-var raias = document.getElementsByClassName("raias");
+var raias = getByClass("raias");
 var childs = raias[0].children;
 // Cria raia-pequena direita
 var raia_r = childs[0].cloneNode(true);
@@ -136,10 +140,10 @@ function showFishs(fishs) {
 
 function save(fish, deep) {
 	var $tudo = document.getElementsByClassName("t" + deep)[0];
-	  	$tudo.getElementsByClassName("nome1")[0].innerHTML = fish[0];
-	  	$tudo.getElementsByClassName("nome2")[0].innerHTML = fish[1];
-	  	$tudo.getElementsByClassName("desc")[0].innerHTML = fish[2];
-	  	$tudo.getElementsByClassName("animal")[0].innerHTML = fish[3];
+	  	getByClass("nome1", $tudo)[0].innerHTML = fish[0];
+	  	getByClass("nome2", $tudo)[0].innerHTML = fish[1];
+	  	getByClass("desc", $tudo)[0].innerHTML = fish[2];
+	  	getByClass("animal", $tudo)[0].innerHTML = fish[3];
 	  	calculateSVG($tudo);
 }
 getFish(1);
