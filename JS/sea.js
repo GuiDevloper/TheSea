@@ -108,12 +108,14 @@ for (var elem of [...raias].values()) {
 }
 
 var index = 0;
+var fishs = [];
+var fish = [];
 // Carrega peixe
 // Recebe profundidade e SE é decrescente
 getFish = function(deep, isLeft) {
 	var max = deep != 1 ? 4 : 5;
 	// Define indice do próximo peixe
-	index = isLeft == null ? 0 : (isLeft ? (
+	index = isLeft == undefined ? 0 : (isLeft ? (
 		index == 0 ? max : index-1) : (
 			index == max ? 0 : index+1 ));
 	var url = "./Fishs/Descriptions/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
@@ -121,13 +123,24 @@ getFish = function(deep, isLeft) {
 	xhr.onreadystatechange = function() {
 		if(Ajax.isReady(this)) {
 			var data = xhr.responseText;
-			var fish = JSON.parse(data)[index];
-			var $tudo = document.getElementsByClassName("t" + deep)[0];
+			fishs.push(JSON.parse(data));
+			deep < 3 ? getFish(deep + 1) : showFishs(fishs);
+		}
+	};
+};
+function showFishs(fishs) {
+	var i = 1;
+	for (var fish of fishs) {
+		save(fish[0], i++);
+	}
+}
+
+function save(fish, deep) {
+	var $tudo = document.getElementsByClassName("t" + deep)[0];
 	  	$tudo.getElementsByClassName("nome1")[0].innerHTML = fish[0];
 	  	$tudo.getElementsByClassName("nome2")[0].innerHTML = fish[1];
 	  	$tudo.getElementsByClassName("desc")[0].innerHTML = fish[2];
 	  	$tudo.getElementsByClassName("animal")[0].innerHTML = fish[3];
 	  	calculateSVG($tudo);
-		}
-	};
 }
+getFish(1);
