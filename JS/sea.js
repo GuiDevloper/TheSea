@@ -108,8 +108,7 @@ for (var elem of [...raias].values()) {
 }
 
 var index = 0;
-var fishs = [];
-var fish = [];
+var fishs = [], fish = [];
 // Carrega peixe
 // Recebe profundidade e SE é decrescente
 getFish = function(deep, isLeft) {
@@ -118,7 +117,7 @@ getFish = function(deep, isLeft) {
 	index = isLeft == undefined ? 0 : (isLeft ? (
 		index == 0 ? max : index-1) : (
 			index == max ? 0 : index+1 ));
-	var url = "./Fishs/Descriptions/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
+	var url = "./Fishs/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
 		if(Ajax.isReady(this)) {
