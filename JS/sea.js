@@ -115,35 +115,37 @@ var index = 0;
 var fishs = [], fish = [];
 // Carrega peixe
 // Recebe profundidade e SE é decrescente
-getFish = function(deep, isLeft) {
-	var max = deep != 1 ? 4 : 5;
-	// Define indice do próximo peixe
-	index = isLeft == undefined ? 0 : (isLeft ? (
-		index == 0 ? max : index-1) : (
-			index == max ? 0 : index+1 ));
+getFish = function(deep) {
 	var url = "./Fishs/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
 		if(Ajax.isReady(this)) {
 			var data = xhr.responseText;
 			fishs.push(JSON.parse(data));
-			deep < 3 ? getFish(deep + 1) : showFishs(fishs);
+			deep < 3 ? getFish(deep + 1) : showDefaults(fishs);
 		}
 	};
 };
-function showFishs(fishs) {
+function showDefaults(fishs) {
 	var i = 1;
 	for (var fish of fishs) {
-		save(fish[0], i++);
+		changeDOM(fish[0], i++);
 	}
 }
 
-function save(fish, deep) {
-	var $tudo = document.getElementsByClassName("t" + deep)[0];
-	  	getByClass("nome1", $tudo)[0].innerHTML = fish[0];
-	  	getByClass("nome2", $tudo)[0].innerHTML = fish[1];
-	  	getByClass("desc", $tudo)[0].innerHTML = fish[2];
-	  	getByClass("animal", $tudo)[0].innerHTML = fish[3];
-	  	calculateSVG($tudo);
+function changeDOM(fish, deep, isLeft) {
+	if (isLeft == undefined) {
+		var max = deep != 1 ? 4 : 5;
+		// Define indice do próximo peixe
+		index = isLeft ? ( index == 0 ? max : index - 1 ) : (
+				index == max ? 0 : index + 1 );
+	}
+	fish = fish.length == 3 ? fish[index] : fish;
+	var $tudo = getByClass("t" + deep)[0];
+	getByClass("nome1", $tudo)[0].innerHTML = fish[0];
+	getByClass("nome2", $tudo)[0].innerHTML = fish[1];
+	getByClass("desc", $tudo)[0].innerHTML = fish[2];
+	getByClass("animal", $tudo)[0].innerHTML = fish[3];
+	calculateSVG($tudo);
 }
 getFish(1);
