@@ -136,17 +136,16 @@ function showDefaults(fishs) {
 function changeDOM(fish, deep, isLeft) {
 	if (isLeft != undefined) {
 		var max = deep != 1 ? 4 : 5;
-		console.log(deep == 3);
 		// Define indice do próximo peixe
 		index = isLeft ? ( index == 0 ? max : index - 1 ) : (
 				index == max ? 0 : index + 1 );
 	}
 	fish = Object.keys(fish).length != 4 ? fish[index] : fish;
 	var $tudo = getByClass("t" + deep)[0];
-	getByClass("nome1", $tudo)[0].innerHTML = fish[0];
-	getByClass("nome2", $tudo)[0].innerHTML = fish[1];
-	getByClass("desc", $tudo)[0].innerHTML = fish[2];
-	getByClass("animal", $tudo)[0].innerHTML = fish[3];
+	var classes = ["nome1", "nome2", "desc", "animal"], i = 0;
+	for (var classe of classes) {
+		getByClass(classe, $tudo)[0].innerHTML = fish[i++];
+	}
 	calculateSVG($tudo);
 }
 getFish(1);
