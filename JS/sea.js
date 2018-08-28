@@ -90,7 +90,7 @@ addRaiaEvent = function(raia) {
 		var indexDeep = ($this.parentElement.parentElement)
 			.classList.value.replace('tudo t', '');
 		// Obtém peixe armazenado usando indice do .tudo
-		changeDOM(fishs[indexDeep-1], indexDeep, isLeft);
+		changeDOM(fishs[indexDeep], indexDeep, isLeft);
 		var transDefault = tran[0] + "0px)" + tran[1];
 		// Mudando atual para translateX(0)
 		setStyle([$this], transDefault);
@@ -111,24 +111,22 @@ for (var elem of [...raias].values()) {
 	}
 }
 
-var index = 0;
+var index = [0, 0, 0];
 var fishs = [], fish = [];
 // Carrega peixes
 getFish = function(deep) {
-	var url = "./Fishs/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
+	var url = "./Fishs/Deep1.json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
 		if(Ajax.isReady(this)) {
-			var data = xhr.responseText;
-			fishs.push(JSON.parse(data));
-			deep < 3 ? getFish(deep + 1) : showDefaults(fishs);
+			fishs = JSON.parse(xhr.responseText);
+			showDefaults(fishs);
 		}
 	};
 };
 function showDefaults(fishs) {
-	var i = 1;
-	for (var fish of fishs) {
-		changeDOM(fish[0], i++);
+	for (var sea = 1; sea<4; sea++) {
+		changeDOM(fishs[sea][0], sea);
 	}
 }
 
@@ -137,10 +135,10 @@ function changeDOM(fish, deep, isLeft) {
 	if (isLeft != undefined) {
 		var max = deep != 1 ? 4 : 5;
 		// Define indice do próximo peixe
-		index = isLeft ? ( index == 0 ? max : index - 1 ) : (
-				index == max ? 0 : index + 1 );
+		index[deep-1] = isLeft ? ( index[deep-1] == 0 ? max : index[deep-1] - 1 ) : (
+				index[deep-1] == max ? 0 : index[deep-1] + 1 );
 	}
-	fish = Object.keys(fish).length != 4 ? fish[index] : fish;
+	fish = Object.keys(fish).length != 4 ? fish[index[deep-1]] : fish;
 	var $tudo = getByClass("t" + deep)[0];
 	var classes = ["nome1", "nome2", "desc", "animal"], i = 0;
 	for (var classe of classes) {
