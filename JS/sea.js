@@ -89,8 +89,8 @@ addRaiaEvent = function(raia) {
 		var tran = ["transform: translateX(", !isLeft ? " rotate(180deg)" : ''];
 		var indexDeep = ($this.parentElement.parentElement)
 			.classList.value.replace('tudo t', '');
-		// Obtém peixe dos JSON usando indice do .tudo
-		getFish(indexDeep, isLeft);
+		// Obtém peixe armazenado usando indice do .tudo
+		changeDOM(fishs[indexDeep-1], indexDeep, isLeft);
 		var transDefault = tran[0] + "0px)" + tran[1];
 		// Mudando atual para translateX(0)
 		setStyle([$this], transDefault);
@@ -113,8 +113,7 @@ for (var elem of [...raias].values()) {
 
 var index = 0;
 var fishs = [], fish = [];
-// Carrega peixe
-// Recebe profundidade e SE é decrescente
+// Carrega peixes
 getFish = function(deep) {
 	var url = "./Fishs/Deep" + deep + ".json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
@@ -133,14 +132,16 @@ function showDefaults(fishs) {
 	}
 }
 
+// Recebe peixe, profundidade e SE é decrescente
 function changeDOM(fish, deep, isLeft) {
-	if (isLeft == undefined) {
+	if (isLeft != undefined) {
 		var max = deep != 1 ? 4 : 5;
+		console.log(deep == 3);
 		// Define indice do próximo peixe
 		index = isLeft ? ( index == 0 ? max : index - 1 ) : (
 				index == max ? 0 : index + 1 );
 	}
-	fish = fish.length == 3 ? fish[index] : fish;
+	fish = Object.keys(fish).length != 4 ? fish[index] : fish;
 	var $tudo = getByClass("t" + deep)[0];
 	getByClass("nome1", $tudo)[0].innerHTML = fish[0];
 	getByClass("nome2", $tudo)[0].innerHTML = fish[1];
