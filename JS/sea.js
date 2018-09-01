@@ -115,7 +115,7 @@ var index = [0, 0, 0];
 var fishs = [], fish = [];
 // Carrega peixes
 getFish = function(deep) {
-	var url = "./Fishs/Deep1.json?q=test&amp;rnd=" + Math.random();
+	var url = "./Fishs/Seas.json?q=test&amp;rnd=" + Math.random();
 	Ajax.send(url, "GET");
 	xhr.onreadystatechange = function() {
 		if(Ajax.isReady(this)) {
