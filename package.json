@@ -1,16 +1,25 @@
 {
-  "name": "TheSea",
-  "version": "0.1.0",
+  "name": "thesea",
+  "version": "0.9.5",
   "description": "A maritime adventure through the sea nature",
-  "main": "sea.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuiDevloper/thesea.git"
+  },
   "scripts": {
     "test": "Nothing to show here"
   },
-  "author": "GuiDevloper",
+  "author": {
+    "name": "GuiDevloper",
+    "url": "https://guidevloper.me/"
+  },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-header": "^2.0.7",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8"
   }
 }
