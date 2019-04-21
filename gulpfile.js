@@ -25,7 +25,6 @@ gulp.task('minify', function () {
     .pipe(uglify())
     .pipe(header(`
       import {
-        getById,
         getByClass,
         getByTag,
         setStyle,
