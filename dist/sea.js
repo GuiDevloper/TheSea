@@ -1,0 +1,10 @@
+
+      import {
+        getByClass,
+        getByTag,
+        setStyle,
+        getLength,
+        Ajax
+      } from 'https://cdn.jsdelivr.net/npm/minimalista@1.0.0/index.min.js';
+
+      var draw,paths,circles,pathLength,c1;function calculateSVG(a){draw=getByTag("svg",getByClass("animal",a)[0])[0],paths=getByTag("path",draw),circles=getByTag("circle",draw);var e=Array.from(paths).concat(Array.from(circles));setStyle(e,"animation: initial"),pathLength=getLength(paths)+getLength(circles),setStyle(e,"stroke-dasharray: "+pathLength+"; stroke-dashoffset: "+pathLength+"; animation: draw 4s forwards;"),c1=draw.querySelectorAll("path, circle")}var raias=getByClass("raias"),childs=raias[0].children,raia_r=childs[0].cloneNode(!0);raia_r.classList.remove("raia-l"),raia_r.classList.add("raia-r"),raias[0].appendChild(raia_r);var addRaiaEvent=function(a){a.addEventListener("click",function(a){var e=a.currentTarget,r="raia-l"==e.classList.value,t=["transform: translateX(",r?"":" rotate(180deg)"],s=e.parentElement.parentElement.classList.value.replace("tudo t","");changeDOM(fishs[s],s,r);var i=t[0]+"0px)"+t[1];setStyle([e],i),t=t[0]+r?"5px)":"-5px)"+t[1],setTimeout(function(){setStyle([e],t)},200)})};for(var i in raias=Array.from(raias))for(var j in raias[i].innerHTML=raias[0].innerHTML,Array.from(raias[i].children))addRaiaEvent(Array.from(raias[i].children)[j]);var index=[0,0,0],fishs=[],fish=[],getFish=function(a){var e="./src/Seas.json?q=test&amp;rnd="+Math.random(),r=Ajax.send(e,"GET");r.onreadystatechange=function(){Ajax.isReady(this)&&showDefaults(fishs=JSON.parse(r.responseText))}};function showDefaults(a){for(var e=1;e<4;e++)changeDOM(a[e][0],e)}function changeDOM(a,e,r){if(null!=r){var t=1!=e?4:5;index[e-1]=r?0==index[e-1]?t:index[e-1]-1:index[e-1]==t?0:index[e-1]+1}a=4!=Object.keys(a).length?a[index[e-1]]:a;var s=getByClass("t"+e)[0],i=["nome1","nome2","desc","animal"];for(var n in i)getByClass(i[n],s)[0].innerHTML=a[n];calculateSVG(s)}getFish(1);

@@ -1,72 +1,18 @@
-getById = function(id, root) {
-	root = root || document;
-	return root.getElementById(id);
-};
-getByClass = function(clas, root) {
-	root = root || document;
-	return root.getElementsByClassName(clas);
-};
-getByTag = function(tag, root) {
-	root = root || document;
-	return root.getElementsByTagName(tag);
-};
-// Set ou update css de elementos
-setStyle = function(els, value) {
-	for (var el of [...els]){
-		el.style.cssText += ";" + value;
-	}
-};
-
-// Get length de svg
-getLength = function(els) {
-	var len = 0;
-	for (var el of [...els].values()) {
-		len += el.tagName == "path" ? el.getTotalLength() :
-			(2 * Math.PI) * el.getAttribute('r');
-	}
-	return len;
-};
-
-var xhr = new XMLHttpRequest();
-//Ajax object construído
-var Ajax = {
-	'send': function(url, type) {
-		xhr.open(type, url, true);
-		xhr.send(null);
-	},
-	'isReady': function($this) {
-		return $this.readyState == 4 && $this.status == 200;
-	}
-};
 
 var draw, paths, circles, pathLength, c1;
 function calculateSVG($tudo) {
 	draw = getByTag("svg", getByClass("animal", $tudo)[0])[0];
 	paths = getByTag("path", draw);
 	circles = getByTag("circle", draw);
-	setStyle([...paths, ...circles], "animation: initial");
+	var a = Array.from(paths).concat(Array.from(circles));
+	setStyle(a, "animation: initial");
 	pathLength = getLength(paths) + getLength(circles);
 	var strokeAndAnim = "stroke-dasharray: " + pathLength +
 		"; stroke-dashoffset: " + pathLength +
 		"; animation: draw 4s forwards;";
-	setStyle([...paths, ...circles], strokeAndAnim);
+	setStyle(a, strokeAndAnim);
 	c1 = draw.querySelectorAll("path, circle");
 }
-
-/*window.addEventListener("scroll", function(e) {
-  var scrollPercentage =
-  	(document.documentElement.scrollTop + document.body.scrollTop) /
-  		(document.documentElement.scrollHeight - document.documentElement.clientHeight);
-  var drawLength = pathLength * scrollPercentage;
-
-	var len = c1.length;
-	var i = 0;
-	while(i < len){
-		c1[i].style.strokeDashoffset = pathLength - drawLength;
-		c1[i].style.fillOpacity = scrollPercentage;
-		i++;
-	}
-});*/
 
 var raias = getByClass("raias");
 var childs = raias[0].children;
@@ -79,7 +25,7 @@ raia_r.classList.add('raia-r');
 raias[0].appendChild(raia_r);
 
 // Add click para setas
-addRaiaEvent = function(raia) {
+var addRaiaEvent = function(raia) {
 	// Abre o node e percorre adding events de click
 	raia.addEventListener('click', function(e) {
 		// Obtém o atual disparador
@@ -103,23 +49,24 @@ addRaiaEvent = function(raia) {
 	});
 };
 
+raias = Array.from(raias);
 // Loop nas div de setas-raias
-for (var elem of [...raias].values()) {
-	elem.innerHTML = raias[0].innerHTML;
-	for (var raia of [...elem.children].values()) {
-		addRaiaEvent(raia);
+for (var i in raias) {
+	raias[i].innerHTML = raias[0].innerHTML;
+	for (var j in Array.from(raias[i].children)) {
+		addRaiaEvent(Array.from(raias[i].children)[j]);
 	}
 }
 
 var index = [0, 0, 0];
 var fishs = [], fish = [];
 // Carrega peixes
-getFish = function(deep) {
-	var url = "./Fishs/Seas.json?q=test&amp;rnd=" + Math.random();
-	Ajax.send(url, "GET");
-	xhr.onreadystatechange = function() {
+var getFish = function(deep) {
+	var url = "./src/Seas.json?q=test&amp;rnd=" + Math.random();
+	var fishx = Ajax.send(url, "GET");
+	fishx.onreadystatechange = function() {
 		if(Ajax.isReady(this)) {
-			fishs = JSON.parse(xhr.responseText);
+			fishs = JSON.parse(fishx.responseText);
 			showDefaults(fishs);
 		}
 	};
@@ -135,14 +82,15 @@ function changeDOM(fish, deep, isLeft) {
 	if (isLeft != undefined) {
 		var max = deep != 1 ? 4 : 5;
 		// Define indice do próximo peixe
-		index[deep-1] = isLeft ? ( index[deep-1] == 0 ? max : index[deep-1] - 1 ) : (
+		index[deep-1] = isLeft ? (
+			index[deep-1] == 0 ? max : index[deep-1] - 1 ) : (
 				index[deep-1] == max ? 0 : index[deep-1] + 1 );
 	}
 	fish = Object.keys(fish).length != 4 ? fish[index[deep-1]] : fish;
 	var $tudo = getByClass("t" + deep)[0];
-	var classes = ["nome1", "nome2", "desc", "animal"], i = 0;
-	for (var classe of classes) {
-		getByClass(classe, $tudo)[0].innerHTML = fish[i++];
+	var classes = ["nome1", "nome2", "desc", "animal"];
+	for (var id in classes) {
+		getByClass(classes[id], $tudo)[0].innerHTML = fish[id];
 	}
 	calculateSVG($tudo);
 }
